@@ -34,8 +34,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const port =  3000;
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-//  const db_Url=process.env.MONGO_API;
+ const db_Url=process.env.MONGO_API;
 
 mongoose.set("strictQuery", true);
 
@@ -44,14 +43,12 @@ main()
  console.log("connected to DB"))
 .catch(err => console.log(err));
 
+
+
+
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(db_Url);
 }
-
-
-// async function main() {
-//   await mongoose.connect(db_Url);
-// }
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
