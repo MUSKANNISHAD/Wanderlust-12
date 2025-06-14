@@ -1,0 +1,104 @@
+<% layout("layouts/boilerPlate.ejs") %>
+  <div class="class"> 
+    <div class="col-8 offset-2"> 
+        <br>
+        <h2>Create New Listing</h2>
+       
+      <form method="POST" 
+       action="/listings"
+       novalidate class="needs-validation" 
+       enctype="multipart/form-data">
+        <div class="mb-3"> 
+            <label for="exampleFormControlInput1" class="form-label" >Title</label>
+            <input type="text"
+             placeholder="enter title"
+             value="<%=listing?.title || '' %> "
+             id="exampleFormControlInput1"
+              class="form-control"
+               name="listing[title]"
+               required>
+           <div class="valid-feedback">Looks Good</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label"> description</label>
+          <input type="text"
+            id="description"
+           placeholder="enter description"
+           name="listing[description]"
+           value="<%= listing?.description || '' %>"
+           class="form-control" 
+           required> 
+        </div>
+        <!-- <div class="mb-3"> 
+            <label for="category" class="form-label">Category</label>
+         <select 
+          class="form-select" 
+          name="listing[category]" 
+          id="category" 
+          required>
+           <option value="">-- Select a category --</option>
+           <option value="Cities">Cities</option>
+           <option value="mountain">Mountain</option>
+           <option value="beaches">Beaches</option>
+           <option value="Pools">Pools</option>
+           <option value="Lakes">Lakes</option>
+           <option value="Farms">Farms</option>
+           <option value="camping">Camping</option>
+           <option value="Arctic">Arctic</option>
+           <option value="Play">Play</option>
+           <option value="boats">Boats</option>
+          <option value="Trending">Trending</option>
+          <option value="Castles">Castles</option>
+        </select>
+        <div class="valid-feedback">Looks good!</div>
+      </div> -->
+
+        <div class="mb-3">
+            <label for="image" class="form-label"> image</label>
+          <input type="file"
+            id="image"
+           name="listing[image]"
+           class="form-control" 
+           required> 
+        </div>
+        <div class="mb-3"> 
+            <label for="price" class="form-label">price</label>
+         <input
+           id="price"
+           placeholder="enter price"
+            name="listing[price]"
+            type="number"
+            value="<%= listing?.price || '' %>"
+           class="form-control" required>
+           <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+         <div class="mb-3"> 
+            <label for="location" class="form-label" >Location</label>
+           <input type="text" placeholder="enter location"
+            name="listing[location]"
+            value="<%= listing?.location || '' %>" 
+            class="form-control" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+         </div>
+         <div class="mb-3"> 
+            <label for="country" class="form-label">Country</label>
+          <input type="text" placeholder="enter country"
+           name="listing[country]"
+           id="country"
+           value="<%= listing?.country || '' %>" 
+           class="form-control" required>
+           <div class="valid-feedback">
+            Looks good!
+          </div>
+         </div>
+         <br>
+        <button class="btn btn-dark add-btn mb-5">add</button>
+        <br>
+    </form>
+  </div>
+    </div>
+    <script src="/js/script.js" ></script>
