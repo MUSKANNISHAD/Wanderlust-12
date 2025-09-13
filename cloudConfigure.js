@@ -1,20 +1,24 @@
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import dotenv from 'dotenv';
-dotenv.config(); // Make sure this is at the top
+
+dotenv.config();
+
+console.log("ENV TEST:", process.env.CLOUDINARY_CLOUD_NAME);
+
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,  // match .env
+  api_key: process.env.CLOUDINARY_API_KEY,        // match .env
+  api_secret: process.env.CLOUDINARY_API_SECRET,  // match .env
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
     folder: 'Wanderlust_Dev',
-    format: async (req, file) => 'jpg', // default to jpg
-    public_id: (req, file) => file.originalname, // optional: custom file name
+    format: async () => 'jpg',
+    public_id: (req, file) => file.originalname,
   },
 });
 

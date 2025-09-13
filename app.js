@@ -1,8 +1,8 @@
-// if(process.env.NODE_ENV!=="production"){ 
-// import { config } from 'dotenv';
-// config();
+import dotenv from "dotenv";
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
-// }
 
 import express from 'express';
 const app=express();
@@ -31,6 +31,21 @@ import userRoutes from "./routes/user.js";
 // onst listingsRoutes=require("./routes/listings.js");
 // const reviews=require("./routes/reviews.js");
 // const userRoutes=require("./routes/user.js");
+
+import { cloudinary } from "./cloudConfigure.js";
+
+app.get("/test-cloudinary", async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload("public/test.jpg", {
+      folder: "Wanderlust_Dev",
+    });
+    console.log("✅ Upload Success:", result.secure_url);
+    res.send(`Uploaded successfully: <a href="${result.secure_url}" target="_blank">${result.secure_url}</a>`);
+  } catch (err) {
+    console.error("❌ Cloudinary Error:", err.message);
+    res.status(500).send("Cloudinary Error: " + err.message);
+  }
+});
 
 
 
