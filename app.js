@@ -1,32 +1,36 @@
-if(process.env.NODE_ENV!=="production"){ 
-import { config } from 'dotenv';
-config();
+// if(process.env.NODE_ENV!=="production"){ 
+// import { config } from 'dotenv';
+// config();
 
-}
+// }
 
 import express from 'express';
 const app=express();
-const mongoose=require('mongoose');
+import mongoose from 'mongoose';
 import Listings from './models/listings.js';
-const path=require("path");
-const methodOverride=require("method-override");
-const ejsMate=require("ejs-mate");
-const WrapAsync=require("./utils/wrapAsync.js");
-const Reviews = require("./models/review.js");
-const session=require("express-session");
-const flash=require("connect-flash");
-const passport=require("passport");
-const LocalStrategy=require("passport-local");
-const passportMongoose=require("passport-local-mongoose");
-const User=require("./models/user.js");
+import path from "path";
+import methodOverride from "method-override";
+import ejsMate from "ejs-mate";
+import WrapAsync from './utils/wrapAsync.js';
+import review from './controller/reviews.js';
+import Review from './models/review.js';
+import session from 'express-session';
+import flash from "connect-flash";
+import passport from 'passport';
+import LocalStrategy from "passport-local";
+import passportMongoose from "passport-local-mongoose";
+import User from './models/user.js';
 const port = process.env.PORT || 3000;
+import { fileURLToPath } from "url";
 
 
+import listingsRoutes from "./routes/listings.js";
+import reviews from './routes/reviews.js';
+import userRoutes from "./routes/user.js";
 
-
-const listingsRoutes=require("./routes/listings.js");
-const reviews=require("./routes/reviews.js");
-const userRoutes=require("./routes/user.js");
+// onst listingsRoutes=require("./routes/listings.js");
+// const reviews=require("./routes/reviews.js");
+// const userRoutes=require("./routes/user.js");
 
 
 
@@ -44,13 +48,16 @@ async function main(){
 }
 
 
-// async function main() {
+// async function main() {c
 //   await mongoose.connect(db_Url);
 // }
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
+app.set("views",path.join(__dirname,"/views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
