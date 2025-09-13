@@ -12,7 +12,7 @@ import ListingsController from "../controller/listings.js";
 import multer from "multer";
 import {storage} from "../cloudConfigure.js";
 
-const upload = multer({ storage: storage, })
+const upload = multer({ storage: storage })
 
 
 // Search route

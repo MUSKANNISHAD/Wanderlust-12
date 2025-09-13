@@ -15,12 +15,13 @@ import WrapAsync from './utils/wrapAsync.js';
 import review from './controller/reviews.js';
 import Review from './models/review.js';
 import session from 'express-session';
+import MongoStore from "connect-mongo";
 import flash from "connect-flash";
 import passport from 'passport';
 import LocalStrategy from "passport-local";
 import passportMongoose from "passport-local-mongoose";
 import User from './models/user.js';
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 import { fileURLToPath } from "url";
 
 
@@ -28,9 +29,6 @@ import listingsRoutes from "./routes/listings.js";
 import reviews from './routes/reviews.js';
 import userRoutes from "./routes/user.js";
 
-// onst listingsRoutes=require("./routes/listings.js");
-// const reviews=require("./routes/reviews.js");
-// const userRoutes=require("./routes/user.js");
 
 import { cloudinary } from "./cloudConfigure.js";
 
@@ -49,8 +47,8 @@ app.get("/test-cloudinary", async (req, res) => {
 
 
 
-const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
-// const db_Url=process.env.MONGO_API;
+// const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
+ const db_Url=process.env.ATLAS_KEY;
 
 main().then(()=>{
     console.log("connected to DB");
@@ -58,14 +56,14 @@ main().then(()=>{
     console.log(err);
 })
 
-async function main(){
-  await mongoose.connect(MONGO_URL);
-}
-
-
-// async function main() {c
-//   await mongoose.connect(db_Url);
+// async function main(){
+//   await mongoose.connect(MONGO_URL);
 // }
+
+
+async function main() {
+  await mongoose.connect(db_Url);
+}
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -79,7 +77,19 @@ app.engine("ejs",ejsMate);
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname,"/public")));
 
+const store=MongoStore.create({
+  mongoUrl:process.env.ATLAS_KEY,
+  crypto:{
+    secret:"mysecretCode"
+  },
+  touchafter:24*60*60,
+})
+store.on("error",()=>{
+  console.log("error in session store",err);
+})
+
  const sessionOption={
+   store,
     secret:"mysecretCode",
     resave:false,
     saveUninitialized:true,
