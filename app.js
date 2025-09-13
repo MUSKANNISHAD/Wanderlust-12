@@ -80,7 +80,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 const store=MongoStore.create({
   mongoUrl:process.env.ATLAS_KEY,
   crypto:{
-    secret:"mysecretCode"
+    secret:process.env.SECRET
   },
   touchafter:24*60*60,
 })
@@ -90,7 +90,7 @@ store.on("error",()=>{
 
  const sessionOption={
    store,
-    secret:"mysecretCode",
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
