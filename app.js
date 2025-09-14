@@ -100,8 +100,9 @@ store.on("error",()=>{
     }
 }
 app.get("/", (req, res) => {
-    res.send("Hii, I am root"); // 
+    res.redirect("/listings");  // redirects users to your listings page
 });
+
  
 
 
