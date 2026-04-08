@@ -9,6 +9,7 @@ export const postReviews = async (req, res) => {
     }
 
     const newReview = new Reviews(req.body.review);
+    console.log(newReview);
     newReview.author = req.user._id;
     console.log("new Review", newReview);
     listing.reviews.push(newReview);

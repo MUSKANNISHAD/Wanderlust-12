@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-// const init=require("./db.js");
 import data from "./db.js";
 import Listings from "../models/listings.js";
 

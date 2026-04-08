@@ -55,6 +55,8 @@ export const showListings = async (req, res) => {
       populate: { path: "author" },
     })
     .populate("owner");
+  console.log(listings);
+
 
   if (!listings) {
     req.flash("error", "Listing not found.");
