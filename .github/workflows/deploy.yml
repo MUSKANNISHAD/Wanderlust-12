@@ -18,8 +18,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ~/wanderlust-runner/Stayhub
+          cd ~/Stayhub-runner/_work/Stayhub/Stayhub
           npm install
 
       - name: Restart server
-        run: pm2 restart stayhub
+        run: |
+          cd ~/Stayhub-runner/_work/Stayhub/Stayhub
+          pm2 restart stayhub
