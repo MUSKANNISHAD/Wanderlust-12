@@ -1,0 +1,25 @@
+name: Deploy Stayhub
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync project files
+        run: |
+          rsync -av --exclude='.env' ./ ~/wanderlust-runner/Stayhub/
+
+      - name: Install dependencies
+        run: |
+          cd ~/wanderlust-runner/Stayhub
+          npm install
+
+      - name: Restart server
+        run: pm2 restart stayhub
