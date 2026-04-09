@@ -51,7 +51,7 @@ app.get("/test-cloudinary", async (req, res) => {
  const db_Url=process.env.ATLAS_KEY;
 
 main().then(()=>{
-    console.log("connected to DB");
+    console.log("connected to Database");
 }).catch((err)=>{
     console.log(err);
 })
