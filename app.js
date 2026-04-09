@@ -118,14 +118,6 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
-// app.get("/registerUser",async(req,res)=>{
-//     let fakeUser=new User({
-//         username:"muskankumarinishad",
-//         email:"muskan@gmail.com",
-//     });
-//     let registerUser=await User.register(fakeUser,"muskannishad");
-//     res.send(registerUser);
-// })
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -148,33 +140,11 @@ const isAuthenticate = (req, res, next) => {
 // then use it on routes:
 app.use("/listings",  listingsRoutes);
 
-// app.use((req,res,next)=>{
-//     res.locals.success=req.flash("success");
-//     console.log(res.locals.success);
-// })
 
 
 app.use("/listings/:id/reviews",reviews);
 app.use("/",userRoutes);
 
-/*app.get("/ListingsSample", async (req, res) => {
-    await Listings.insertMany(sampleListings);
-    console.log("Sample listings were saved");
-    res.send("Success");
-  });
-  */
-
-  
- /* app.all("*", (req, res, next) => {
-    console.log(`Unhandled route: ${req.originalUrl}`);
-    next(new expressError(404, "page not found"));
-  });
-  
-    app.use((err, req, res, next) => {
-        let { statusCode = 500, message = "Something went wrong!" } = err;
-        res.status(statusCode).send(message);
-    });
-    */
 
 
 
