@@ -14,7 +14,7 @@ jobs:
 
       - name: Sync project files
         run: |
-          rsync -av --exclude='.env' ./ ~/wanderlust-runner/Stayhub/
+          rsync -av --exclude='.env' ./ ~/Stayhub-runner/_work/Stayhub/Stayhub/
 
       - name: Install dependencies
         run: |
