@@ -1,22 +1,43 @@
 <style>
-  .fa-solid{
-    display: inline;
+  .fa-solid {
+  display: inline;
+}
+
+.search {
+  border-radius: 25px;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+  font-size: 0.9rem;
+}
+
+.bars {
+  display: none;
+}
+
+/* Hide right nav and show bars */
+@media (max-width:660px) {
+  .rigth-nav {
+    display: none;
   }
-  .search{
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 0.9rem;
-      }
-    @media(max-width:660px){
-      .rigth-nav{
-        visibility: hidden;
-      }
-    }
-    @media(max-width:900px){
-      .search-bar{
-        visibility: hidden;
-      }
-    }
+
+  .bars {
+    display: block;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+@media (max-width:900px) {
+  .search-bar {
+    display: none;
+  }
+}
+
+.outer-layer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -29,28 +50,32 @@
       </a>
 
       <!-- Center: Add Listing -->
-       <div class="search-bar"> 
-       <form class="d-flex" role="search" action="/listings/search" method="GET">
-        <input class="form-control me-2 search" type="search"  name="q"placeholder="Search Destination" />
-        <button style="background-color: #FF5A5F; padding: 0.5rem; border-radius: 25px; height: 40px;" class="btn btn-outline"
-         type="submit"><i style="font-size: 1.2rem; "  class="fa-solid fa-magnifying-glass"></i>Search</button>
-      </form>
+      <div class="search-bar">
+        <form class="d-flex" role="search" action="/listings/search" method="GET">
+          <input class="form-control me-2 search" type="search" name="q" placeholder="Search Destination" />
+          <button style="background-color: #FF5A5F; padding: 0.5rem; border-radius: 25px; height: 40px;"
+            class="btn btn-outline" type="submit"><i style="font-size: 1.2rem; "
+              class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
       </div>
-      
+
 
 
 
       <!-- Right: Auth Links -->
-      <div class="rigth-nav"style="display: flex; gap: 1rem;">
-      <a class="nav-link" href="/listings/new"><h4>Add new listings</h4></a>
+      <div class="rigth-nav" style="display: flex; gap: 1rem;">
+        <a class="nav-link" href="/listings/new">
+          <h4>Add new listings</h4>
+        </a>
 
         <% if (!currentUser) { %>
           <a class="nav-link" href="/signup"><b>Signup</b></a>
           <a class="nav-link" href="/login"><b>Sign in</b></a>
-        <% } else { %>
-          <a class="nav-link" href="/logout"><b>Logout</b></a>
-        <% } %>
+          <% } else { %>
+            <a class="nav-link" href="/logout"><b>Logout</b></a>
+            <% } %>
       </div>
+      <div class="bars"> <i class="fa-solid fa-bars"></i></div>
     </div>
   </div>
 </nav>
