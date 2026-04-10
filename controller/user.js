@@ -36,4 +36,4 @@ export const logout = (req, res, next) => {
     });
 };
 
-export default {renderRegister,login,signup,logout};
+export default { renderRegister, login, signup, logout };

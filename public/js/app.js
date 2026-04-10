@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   let taxToggle = document.getElementById("switchCheckReverse");
   console.log(taxToggle);
   taxToggle.addEventListener("change", function () {
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-  function toggleFilters() {
-    const filters = document.querySelector(".filters");
-    filters.classList.toggle("show");
-  }
+function toggleFilters() {
+  const filters = document.querySelector(".filters");
+  filters.classList.toggle("show");
+}

@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 
 
 import express from 'express';
-const app=express();
+const app = express();
 import mongoose from 'mongoose';
 import Listings from './models/listings.js';
 import path from "path";
@@ -48,12 +48,12 @@ app.get("/test-cloudinary", async (req, res) => {
 
 
 // const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
- const db_Url=process.env.ATLAS_KEY;
+const db_Url = process.env.ATLAS_KEY;
 
-main().then(()=>{
-    console.log("connected to Database");
-}).catch((err)=>{
-    console.log(err);
+main().then(() => {
+  console.log("connected to Database");
+}).catch((err) => {
+  console.log(err);
 })
 
 // async function main(){
@@ -69,41 +69,41 @@ async function main() {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"/views"));
-app.use(express.urlencoded({extended:true}));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.engine("ejs",ejsMate);
+app.engine("ejs", ejsMate);
 app.use(express.static('public'));
-app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
-const store=MongoStore.create({
-  mongoUrl:process.env.ATLAS_KEY,
-  crypto:{
-    secret:process.env.SECRET
+const store = MongoStore.create({
+  mongoUrl: process.env.ATLAS_KEY,
+  crypto: {
+    secret: process.env.SECRET
   },
-  touchafter:24*60*60,
+  touchafter: 24 * 60 * 60,
 })
-store.on("error",()=>{
-  console.log("error in session store",err);
+store.on("error", () => {
+  console.log("error in session store", err);
 })
 
- const sessionOption={
-   store,
-    secret:process.env.SECRET,
-    resave:false,
-    saveUninitialized:true,
-    cookie:{
-        expires:Date.now()+7*24*60*60*1000,
-        maxAge:7*24*60*60*1000,
-        httpOnly:true,
-    }
+const sessionOption = {
+  store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  }
 }
 app.get("/", (req, res) => {
-    res.redirect("/listings");  // redirects users to your listings page
+  res.redirect("/listings");  // redirects users to your listings page
 });
 
- 
+
 
 
 app.use(session(sessionOption));
@@ -120,10 +120,10 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    res.locals.currentUser = req.user;
-    next();
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currentUser = req.user;
+  next();
 });
 
 
@@ -138,16 +138,16 @@ const isAuthenticate = (req, res, next) => {
 };
 
 // then use it on routes:
-app.use("/listings",  listingsRoutes);
+app.use("/listings", listingsRoutes);
 
 
 
-app.use("/listings/:id/reviews",reviews);
-app.use("/",userRoutes);
+app.use("/listings/:id/reviews", reviews);
+app.use("/", userRoutes);
 
 
 
 
-app.listen(8080,()=>{
-    console.log("server is listening on port 8080");
+app.listen(8080, () => {
+  console.log("server is listening on port 8080");
 });

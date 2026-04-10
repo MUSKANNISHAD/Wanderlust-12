@@ -1,81 +1,162 @@
 <style>
-  .fa-solid {
-  display: inline;
+/* Icons */
+.fa-solid{
+  display:inline;
 }
 
-.search {
-  border-radius: 25px;
-  padding: 0.5rem 3rem 0.5rem 3rem;
-  font-size: 0.9rem;
+/* Search input */
+.search{
+  border-radius:25px;
+  padding:0.5rem 3rem;
+  font-size:0.9rem;
 }
 
-.bars {
-  display: none;
-}
-
-/* Hide right nav and show bars */
-@media (max-width:660px) {
-  .rigth-nav {
-    display: none;
-  }
-
-  .bars {
-    display: block;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-}
-
-@media (max-width:900px) {
-  .search-bar {
-    display: none;
-  }
-}
-
+/* Layout wrapper */
 .outer-layer{
   display:flex;
   align-items:center;
   justify-content:space-between;
   width:100%;
+  position:relative;
+}
+
+/* Right navbar links */
+.right-nav{
+  display:flex;
+  gap:1rem;
+}
+
+/* Hamburger button */
+.bars{
+  display:none;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+
+/* Mobile dropdown menu */
+.mobile-menu{
+  position:absolute;
+  top:70px;
+  right:20px;
+  background:white;
+  border-radius:10px;
+  padding:1rem;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.mobile-menu a{
+  text-decoration:none;
+  color:black;
+  font-weight:500;
+}
+
+/* Show dropdown */
+.mobile-menu.show{
+  display:flex;
+}
+
+/* Hide search on medium screens */
+@media (max-width:900px){
+  .search-bar{
+    display:none;
+  }
+}
+
+/* Mobile navbar */
+@media (max-width:650px){
+
+  .right-nav{
+    display:none;
+  }
+
+  .bars{
+    display:block;
+  }
+
 }
 </style>
 
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
+
     <div class="outer-layer">
-      <!-- Left: Brand -->
-      <a class="navbar-brand me-4" href="/listings" style="color: #FF5A5F; font-size: 1.8rem;">
-        <i class="fa-brands fa-airbnb" style="color: #FF5A5F; font-size: 2.5rem;"></i>
+
+      <!-- Brand -->
+      <a class="navbar-brand me-4" href="/listings" style="color:#FF5A5F;font-size:1.8rem;">
+        <i class="fa-brands fa-airbnb" style="color:#FF5A5F;font-size:2.5rem;"></i>
         <b>airbnb</b>
       </a>
 
-      <!-- Center: Add Listing -->
+
+      <!-- Search -->
       <div class="search-bar">
-        <form class="d-flex" role="search" action="/listings/search" method="GET">
-          <input class="form-control me-2 search" type="search" name="q" placeholder="Search Destination" />
-          <button style="background-color: #FF5A5F; padding: 0.5rem; border-radius: 25px; height: 40px;"
-            class="btn btn-outline" type="submit"><i style="font-size: 1.2rem; "
-              class="fa-solid fa-magnifying-glass"></i>Search</button>
+        <form class="d-flex" action="/listings/search" method="GET">
+          <input class="form-control me-2 search"
+                 type="search"
+                 name="q"
+                 placeholder="Search Destination">
+
+          <button class="btn btn-outline"
+                  style="background-color:#FF5A5F;padding:0.5rem;border-radius:25px;height:40px;"
+                  type="submit">
+            <i class="fa-solid fa-magnifying-glass" style="font-size:1.2rem;"></i>
+            Search
+          </button>
         </form>
       </div>
 
 
+      <!-- Desktop links -->
+      <div class="right-nav">
 
-
-      <!-- Right: Auth Links -->
-      <div class="rigth-nav" style="display: flex; gap: 1rem;">
         <a class="nav-link" href="/listings/new">
           <h4>Add new listings</h4>
         </a>
 
-        <% if (!currentUser) { %>
+        <% if(!currentUser){ %>
           <a class="nav-link" href="/signup"><b>Signup</b></a>
           <a class="nav-link" href="/login"><b>Sign in</b></a>
-          <% } else { %>
-            <a class="nav-link" href="/logout"><b>Logout</b></a>
-            <% } %>
+        <% } else { %>
+          <a class="nav-link" href="/logout"><b>Logout</b></a>
+        <% } %>
+
       </div>
-      <div class="bars"> <i class="fa-solid fa-bars"></i></div>
+
+
+      <!-- Hamburger -->
+      <div class="bars">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+
+      <!-- Mobile dropdown -->
+      <div class="mobile-menu" id="mobileMenu">
+
+        <a href="/listings/new">Add new listings</a>
+
+        <% if(!currentUser){ %>
+          <a href="/signup">Signup</a>
+          <a href="/login">Sign in</a>
+        <% } else { %>
+          <a href="/logout">Logout</a>
+        <% } %>
+
+      </div>
+
     </div>
   </div>
 </nav>
+
+
+<script>
+const bars = document.querySelector(".bars");
+const menu = document.getElementById("mobileMenu");
+
+bars.addEventListener("click",()=>{
+  menu.classList.toggle("show");
+});
+</script>

@@ -14,8 +14,8 @@ const newListing = new Listing({
   price: 2000,
   location: 'Tokyo',
   country: 'Japan',
-  category: 'Pools', 
-  owner: '682c1372c3911456d26ce31c', 
+  category: 'Pools',
+  owner: '682c1372c3911456d26ce31c',
 });
 
 await newListing.save();

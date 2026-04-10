@@ -3,7 +3,7 @@ import Listings from "../models/listings.js";
 
 export const postReviews = async (req, res) => {
     const listing = await Listings.findById(req.params.id);
-    
+
     if (!listing) {
         throw new expressError(404, "Listing not found");
     }
@@ -28,4 +28,4 @@ export const deleteReviews = async (req, res) => {
 
     res.redirect(`/listings/${id}`);
 };
- export default {postReviews,deleteReviews};
+export default { postReviews, deleteReviews };
