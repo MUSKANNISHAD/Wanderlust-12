@@ -14,12 +14,14 @@ jobs:
 
       - name: Sync project files
         run: |
-          rsync -av --exclude='.env' ./ ~/wanderlust-runner/Stayhub/
+          rsync -av --exclude='.env' ./ ~/Stayhub-runner/_work/Stayhub/Stayhub/
 
       - name: Install dependencies
         run: |
-          cd ~/wanderlust-runner/Stayhub
+          cd ~/Stayhub-runner/_work/Stayhub/Stayhub
           npm install
 
       - name: Restart server
-        run: pm2 restart stayhub
+        run: |
+          cd ~/Stayhub-runner/_work/Stayhub/Stayhub
+          pm2 restart stayhub
