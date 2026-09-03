@@ -28,8 +28,7 @@ views/ – EJS templates
 public/ – static files (CSS, images)
 
 ## Live Demo
-
-http://56.228.49.72:8080/listings
+https://stayhub-0mx3.onrender.com/listings
 
 ## Author
 
